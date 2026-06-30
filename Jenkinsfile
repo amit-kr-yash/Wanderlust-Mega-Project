@@ -32,7 +32,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/amit-kr-yash/Wanderlust-Mega-Project.git","main")
+                    checkout("https://github.com/amit-kr-yash/Wanderlust-Mega-Project.git","main")
                 }
             }
         }
@@ -97,11 +97,11 @@ pipeline {
             steps{
                 script{
                         dir('backend'){
-                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","amit-kr-yash")
+                            build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","ameet56")
                         }
                     
                         dir('frontend'){
-                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","amit-kr-yash")
+                            build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","ameet56")
                         }
                 }
             }
@@ -110,8 +110,8 @@ pipeline {
         stage("Docker: Push to DockerHub"){
             steps{
                 script{
-                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","amit-kr-yash") 
-                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","amit-kr-yash")
+                    push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","ameet56") 
+                    push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","ameet56")
                 }
             }
         }
